@@ -1,5 +1,6 @@
 import os
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_community.chat_models import ChatOllama
+from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_core.messages import HumanMessage, SystemMessage
 from ingest import ingest_user_document, batch_ingest
@@ -8,15 +9,13 @@ from config import (
     CHROMA_DB_PATH,
     EMBEDDING_MODEL,
     LLM_MODEL,
-    TOP_K,
-    OPENAI_API_KEY
-)
+    TOP_K)
 
 # -----------------------------
 # Load Vector Store (for querying)
 # -----------------------------
 def load_vector_store():
-    embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL,openai_api_key=OPENAI_API_KEY)
+    embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL)
     vectorstore = Chroma(
         persist_directory=CHROMA_DB_PATH,
         embedding_function=embeddings
@@ -74,7 +73,7 @@ def main():
     print("Commands: 'exit' to quit, 'upload <path>' for single file, 'ingest <dir>' for batch.\n")
     
     vectorstore = load_vector_store()
-    llm = ChatOpenAI(model=LLM_MODEL, temperature=0,openai_api_key=OPENAI_API_KEY)
+    llm = ChatOllama(model=LLM_MODEL, temperature=0)
     
     while True:
         query = input("You: ").strip()

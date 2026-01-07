@@ -1,7 +1,7 @@
 import os
 from langchain_community.document_loaders import TextLoader, PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
 
@@ -9,8 +9,7 @@ from config import (
     CHUNK_SIZE,
     CHUNK_OVERLAP,
     CHROMA_DB_PATH,
-    EMBEDDING_MODEL,
-    OPENAI_API_KEY
+    EMBEDDING_MODEL
 )
 
 
@@ -43,7 +42,7 @@ def ingest_user_document(file_path, vectorstore):
 
     chunks = splitter.split_documents(docs_with_metadata)
     vectorstore.add_documents(chunks)
-    vectorstore.save_local(CHROMA_DB_PATH)  # Updated for LangChain 1.x
+    vectorstore.save_local(CHROMA_DB_PATH) 
 
     print("Document ingested successfully!")
 
@@ -79,7 +78,7 @@ def split_documents(documents):
     return splitter.split_documents(documents)
 
 def store_embeddings(chunks):
-    embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL,openai_api_key=OPENAI_API_KEY)
+    embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL)
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
