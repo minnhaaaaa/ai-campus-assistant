@@ -1,7 +1,7 @@
 import os
-from langchain_community.chat_models import ChatOllama
-from langchain_community.embeddings import OllamaEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_ollama import ChatOllama
+from langchain_ollama import OllamaEmbeddings
+from langchain_chroma import Chroma
 from langchain_core.messages import HumanMessage, SystemMessage
 from ingest import ingest_user_document, batch_ingest
 
@@ -11,9 +11,7 @@ from config import (
     LLM_MODEL,
     TOP_K)
 
-# -----------------------------
-# Load Vector Store (for querying)
-# -----------------------------
+
 def load_vector_store():
     embeddings = OllamaEmbeddings(model=EMBEDDING_MODEL)
     vectorstore = Chroma(
@@ -22,9 +20,7 @@ def load_vector_store():
     )
     return vectorstore
 
-# -----------------------------
-# Build Prompt
-# -----------------------------
+
 def build_prompt(context, question):
     system_prompt = (
         "You are a knowledge-aware AI assistant.\n"
@@ -46,9 +42,7 @@ Question:
         HumanMessage(content=user_prompt)
     ]
 
-# -----------------------------
-# Answer Query
-# -----------------------------
+
 def answer_query(llm, vectorstore, query):
     docs = vectorstore.similarity_search(query, k=TOP_K)
     
@@ -65,13 +59,15 @@ def answer_query(llm, vectorstore, query):
     
     return response.content
 
-# -----------------------------
 # CLI Loop
-# -----------------------------
+
 def main():
-    print("📚 Knowledge-Aware AI Assistant (CLI)")
-    print("Commands: 'exit' to quit, 'upload <path>' for single file, 'ingest <dir>' for batch.\n")
-    
+    print("------------------------------------------------------------------------------------")
+    print("Welcome to your Knowledge Aware AI Assistant!")
+    print("----------------------------------------------------------------------")
+    print("Commands: 'exit' to quit, 'upload <path>' for single file, 'ingest <dir>' for batch.")
+    print("------------------------------------------------------------------------------------")
+
     vectorstore = load_vector_store()
     llm = ChatOllama(model=LLM_MODEL, temperature=0)
     

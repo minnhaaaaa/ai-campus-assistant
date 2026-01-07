@@ -1,8 +1,8 @@
 import os
 from langchain_community.document_loaders import TextLoader, PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import OllamaEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_ollama import OllamaEmbeddings
+from langchain_chroma import Chroma
 from langchain_core.documents import Document
 
 from config import (
@@ -42,8 +42,6 @@ def ingest_user_document(file_path, vectorstore):
 
     chunks = splitter.split_documents(docs_with_metadata)
     vectorstore.add_documents(chunks)
-    vectorstore.save_local(CHROMA_DB_PATH) 
-
     print("Document ingested successfully!")
 
 
@@ -84,12 +82,11 @@ def store_embeddings(chunks):
         embedding=embeddings,
         persist_directory=CHROMA_DB_PATH
     )
-    vectorstore.save_local(CHROMA_DB_PATH)  # Use save_local for LangChain 1.x
     return vectorstore
 
 
 def batch_ingest(data_dir="data"):
-    print("📄 Loading documents from directory...")
+    print(" Loading documents from directory 📄")
     documents = load_documents(data_dir)
     if not documents:
         print("No documents found. Skipping ingestion.")
@@ -97,11 +94,11 @@ def batch_ingest(data_dir="data"):
     
     print(f"Loaded {len(documents)} documents")
     
-    print("✂️ Splitting into chunks...")
+    print(" Splitting into chunks ✂️")
     chunks = split_documents(documents)
     print(f"Created {len(chunks)} chunks")
     
-    print("🧠 Generating embeddings & storing in Chroma...")
+    print(" Generating embeddings and storing in Chroma 🧠")
     vectorstore = store_embeddings(chunks)
-    print("✅ Batch ingestion complete!")
+    print(" Batch ingestion complete ✅")
     return vectorstore
