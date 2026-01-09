@@ -45,8 +45,8 @@ Place your PDF in your home directory or project folder, then type:
 upload ~/SHINE-FAQs.pdf
 ```
 
-✔ First upload may take time (embedding creation)
-✔ Data is saved in `chroma_db/`
+* First upload may take time (embedding creation)
+* Data is saved in `chroma_db/`
 
 ---
 
@@ -89,7 +89,7 @@ Who can apply for scholarships?
 
 ## Summary
 
-* 100% local & free
+* Local & free
 * Fast after first run
 * Persistent memory
 * Easy to extend
