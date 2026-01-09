@@ -60,8 +60,6 @@ What are the campus rules?
 Who can apply for scholarships?
 ```
 
-Responses should be fast after the first run ⚡
-
 ---
 
 ## API Keys & Security
@@ -84,7 +82,6 @@ Responses should be fast after the first run ⚡
 ## Future Improvements
 
 * Web UI (React / Flask)
-* Multiple document support
 * Source citations
 * Streaming responses
 
