@@ -1,4 +1,4 @@
-# AI Campus Assistant 📚🤖
+# AI Campus Assistant 
 
 An **offline, privacy-friendly AI Campus Assistant** that allows you to upload campus-related PDFs (FAQs, rules, guides) and ask natural language questions about them using **Ollama + LangChain + ChromaDB** — **no OpenAI or paid APIs required**.
 
@@ -13,7 +13,7 @@ An **offline, privacy-friendly AI Campus Assistant** that allows you to upload c
 
 ---
 
-## 🚀 Running the Project
+## Running the Project
 
 ### Step 1: Start Ollama Server
 
@@ -35,7 +35,7 @@ python assistant.py
 
 ---
 
-## 🧪 How to Use
+##  How to Use
 
 ### Upload a PDF
 
@@ -64,15 +64,15 @@ Responses should be fast after the first run ⚡
 
 ---
 
-## 🔐 API Keys & Security
+## API Keys & Security
 
-* ❌ No OpenAI key required
-* ❌ No internet required after setup
-* ✅ Safe to push to GitHub
+* No OpenAI key required
+* No internet required after setup
+* Safe to push to GitHub
 
 ---
 
-## 🎯 Use Cases
+## Use Cases
 
 * Campus FAQ bots
 * College helpdesk assistant
@@ -81,7 +81,7 @@ Responses should be fast after the first run ⚡
 
 ---
 
-## 📌 Future Improvements (Optional)
+## Future Improvements
 
 * Web UI (React / Flask)
 * Multiple document support
@@ -90,7 +90,7 @@ Responses should be fast after the first run ⚡
 
 ---
 
-## 🏁 Summary
+## Summary
 
 * 100% local & free
 * Fast after first run
